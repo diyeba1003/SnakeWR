@@ -1,0 +1,43 @@
+@charset "UTF-8";
+@charset "UTF-8";
+
+header{
+	background-color:black;
+	color:white;
+	text-align:center;
+	height:100px;
+	
+}
+
+
+marquee{
+	color:green;
+	size:80px;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://media.gettyimages.com/id/1131356142/fr/vectoriel/cobra-serpent-couleur-designs-de-tatouage-tribal.webp?s=2048x2048&w=gi&k=20&c=w6cdyH4jryspeoRtSiOciwDo_5WATGbiS4fX64wyxTY=");
+  background-repeat:no repeat;
+  
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height:600px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+  filter : opacity(80%);
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+.text-info{
+	size:35px;
+}

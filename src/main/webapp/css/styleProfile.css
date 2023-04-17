@@ -1,0 +1,82 @@
+@charset "UTF-8";
+s
+body {
+	font-family: arial;
+	margin: 0;
+}
+/*On met position relative pour que la photo reste dans le cadre qu'on a définit(container)
+relative permet de dire que la largeur maximal ne doit pas dépasser la largeur du parent(donc a container), sinon tout serai positionner par rapport a body*/
+.container {
+	position: relative;
+	margin: auto; /*centrer au niveau de l'écran*/
+	width: 100%;
+	height: 300px;
+	background-image:
+		url(data:image/png;base64,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);
+	background-size: cover;
+	/*	border-radius: 5px; */ /*Bordure arrondi*/
+	overflow: hidden; /*Tous ce qui depasse va être coupé*/
+}
+
+.informations-bar {
+	position: absolute;
+	/*La bar est figéé dans notre container et pas dans body*/
+	bottom: 0; /*La bar ce met tout en bas*/
+	width: 100%;
+	height: 65px;
+	background-color: #151728; /*gris foncé*/
+}
+
+/*Dans profile on a le nom et*/
+.profil {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	/*Car on a log et image dans profile, on veut coller le log a l'image donc on fait flex*/
+	bottom: 20px;
+	left: 20px; /*on laisse 20px d'ecart entre photo en le bas*/
+}
+
+img {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 3px solid #151728;
+}
+
+ul {
+	position: relative;
+	width: 100%;
+	display: flex;
+	padding-left: 200px; /*bien s'ecarter de la photo*/
+	height: 100%;
+	margin: 0;
+}
+
+li,a {
+	list-style: none;
+	cursor: pointer;
+	color: #5c5e6e;
+	/* Lorsqu'on va cliquer sur un lien, la souris elle change même si ce n'est pas un lien*/
+	font-size: 1.1em;
+	padding: 1.5em 1em;
+	transition: all .1s;
+}
+
+li:hover, a:hover{
+	color: #399c94;
+	border-bottom: 8px solid #1488fa;
+}
+.active {
+	color: white;
+	border-bottom: 3px solid #1488fa;
+	bottom: 0;
+}
+.name {
+	color: red;
+	margin-left: 1.5em;
+	font-size: 1.5em;
+}
+a{
+	text-decoration: none;
+}
