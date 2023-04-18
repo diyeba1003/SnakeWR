@@ -14,12 +14,36 @@
 </head>
 <body>
 
+<header>
+<h3> <!--  <img alt=""  src="https://thumbs.dreamstime.com/b/serpent-51205237.jpg" height="25px;">-->
+Jeu Snake
+
+ <!-- <img alt=""  src="https://thumbs.dreamstime.com/b/serpent-51205237.jpg" height="25px;">-->
+ </h3>
+</header>
+<marquee scrollamount="10" scrolldelay="5">
+<b>Bienvenue veillez vous identifier ou vous inscrire !!!  </b>
+</marquee>
+
 <div class="container">
 
 <div class="parametre"></div>
-<div id="d">
-<p>Prenom:<c:out value="${sessionScope.sessionUser.prenom }"/></p><br>
-<c:if test="${not empty userGame}">
+
+
+
+
+
+
+
+
+<div class="row">
+			<div class="col-md-4">
+				<img src="https://i.ibb.co/yVGxFPR/2.png" class="img-fluid rounded-circle"/>
+			</div>
+			<div class="col-md-8">
+				<h1>Mon Profil</h1>
+				<p>Prenom:<c:out value="${sessionScope.sessionUser.prenom }"/></p>
+				<c:if test="${not empty userGame}">
 
 <p>  Rang: <c:out value="${userGame.rang }"/>
  </p>
@@ -30,9 +54,12 @@
         <p>Aucune <c:out value="${userGame.login }"/> n'a été passée par l'utilisateur connecté.</p>
     </c:if>
 
-<p>Nom : <c:out value="${sessionScope.sessionUser.nom }"/></p><br>
-<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUser.login}</p><br>
-  </div>  
+<p>Nom : <c:out value="${sessionScope.sessionUser.nom }"/></p>
+<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUser.login}</p>
+			</div>
+		</div>
+
+
 
 <div class="informations-bar">
 <nav>
@@ -57,11 +84,11 @@ SupprimerUser
 
 
 
-<div class="profil">
+<!-- <div class="profil">
 		<img src="https://i.ibb.co/yVGxFPR/2.png"/>
 	<p class="name"></p>
 	
-	</div>
+	</div> -->
 </div>
 </div>
 

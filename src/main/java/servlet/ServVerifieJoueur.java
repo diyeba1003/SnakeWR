@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Utilisateur;
+import dao.DaoFactory;
 import dao.UtilisateurDao;
 import forms.ConnexionForm;
 
@@ -32,6 +33,13 @@ public class ServVerifieJoueur extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public void init() throws ServletException {
+
+		/* recuperation d'une instance de dao utilisateur */
+		DaoFactory daoFactory = DaoFactory.getInstance();
+		this.utilisateurDao = daoFactory.getUtilisateurDao();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,28 +49,27 @@ System.out.println("Je passe par lÃ ");
 		
 		String loginUser = (request.getParameter("login") != null) ? request.getParameter( "login" ) : "";
 		String passwordUser = (request.getParameter( "password" ) != null) ? request.getParameter( "password" ) : "";
-		
-		
-	//	Utilisateur  user = new Utilisateur();
-		ConnexionForm form = new ConnexionForm(utilisateurDao);
-		Utilisateur utilisateur = form.connectUser(request);
-		HttpSession session = request.getSession();
-		if(form.getErreurs().isEmpty()) {
-			
-		//Utilisateur utilisateur = form.connectUser(request);
-		//utilisateurDao.verifConnexion(loginUser);
-		//utilisateurDao.verifPassword(passwordUser);
+		System.out.println("le passsssworddddddddd   est " + passwordUser);
 		PrintWriter printWriter = new PrintWriter(response.getWriter(), true);
 		
-		if(form.getErreurs().isEmpty()) {
-			printWriter.print("true");
-			System.out.println("True");		
-		}else {
+		//verification de la connexion 
+		if(utilisateurDao.verifConnexion(loginUser)!=null) {
+			if(utilisateurDao.verifPassword(passwordUser)!=null)
+			//PrintWriter printWriter = new PrintWriter(response.getWriter(), true);
+			 printWriter.print("true");
+			 System.out.println("true");
+			 HttpSession session = request.getSession();
+			
+		}
+		
+		
+		
+		else {
 			printWriter.print("true");
 			System.out.println("False");	
 		}
 		}
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

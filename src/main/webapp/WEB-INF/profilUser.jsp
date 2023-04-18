@@ -17,12 +17,21 @@
 <div class="container">
 
 <div class="parametre"></div>
-<div id="d">
-<p>Prenom:<c:out value="${sessionScope.sessionUser.prenom }"/></p><br>
-<p>Rang: </p>
-<p>Nom : <c:out value="${sessionScope.sessionUser.nom }"/></p><br>
-<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUser.login}</p><br>
-  </div>  
+<div class="row">
+			<div class="col-md-4">
+				
+			</div>
+			<div class="col-md-8">
+				<h1>Mon Profil</h1>
+				<p>Prenom:<c:out value="${sessionScope.sessionUser.prenom }"/></p>
+
+ 
+ 
+
+<p>Nom : <c:out value="${sessionScope.sessionUser.nom }"/></p>
+<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUser.login}</p>
+			</div>
+		</div>  
 
 <div class="informations-bar">
 <nav>

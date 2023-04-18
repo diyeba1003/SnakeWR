@@ -6,6 +6,7 @@ public class UserGame {
 	private String login;
 	private int nbGagner;
 	private int nbJouer;
+	private int nbPoint;
 	private int rang;
 	
 	public int getId() {
@@ -37,6 +38,12 @@ public class UserGame {
 	}
 	public void setRang(int rang) {
 		this.rang = rang;
+	}
+	public int getNbPoint() {
+		return nbPoint;
+	}
+	public void setNbPoint(int nbPoint) {
+		this.nbPoint = nbPoint;
 	}
 	
 	

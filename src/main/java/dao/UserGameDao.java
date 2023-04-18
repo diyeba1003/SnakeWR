@@ -14,5 +14,6 @@ public interface UserGameDao {
 	
 	public List<UserGame> listUser(String login);
 	public UserGame updateHistory(UserGame user);
+	public void miseAJourRang(UserGame user);
 
 }

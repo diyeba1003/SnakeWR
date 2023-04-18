@@ -224,14 +224,28 @@ public class UserGameDaoImpl implements UserGameDao{
 			connexion = daoFactory.getConnection();
 			
 			 // Mise à jour du rang de l'utilisateur
-	        user.setRang(user.getRang() + 1);
-
-			preparedStatement = connexion.prepareStatement("UPDATE  userGame SET nbJouer=?  WHERE login=?;");
+	        user.setNbJouer(user.getNbJouer() + 1);
+            
+	        
+	        
+	        
+	        preparedStatement = connexion.prepareStatement("SELECT * FROM UserGame WHERE login = ?");
+	        preparedStatement.setString(1, user.getLogin());
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        resultSet.next();
+	        int pointsActuels = resultSet.getInt("nbJouer");
+	        
+	        int nouveau = pointsActuels + 1; 
+	        
+	        
+	        
+			preparedStatement = connexion.prepareStatement("UPDATE  UserGame SET nbJouer=? , nbPoint=? WHERE login=?;");
 			System.out.println("requete modifff:" + preparedStatement);
-			preparedStatement.setInt(1, user.getNbJouer());
+			preparedStatement.setInt(1, nouveau);
+			preparedStatement.setInt(2, user.getNbPoint());
 			//preparedStatement.setString(2, utilisateur.getPassword());
-			preparedStatement.setString(2, user.getLogin());
-			preparedStatement.setInt(3, user.getId());
+			preparedStatement.setString(3, user.getLogin());
+			//preparedStatement.setInt(3, user.getId());
 			preparedStatement.executeUpdate();
 			System.out.println("requete update:" + preparedStatement);
 			connexion.commit();
@@ -261,6 +275,92 @@ public class UserGameDaoImpl implements UserGameDao{
 			}
 		}
 		return user;
+	}
+
+	@Override
+	public void miseAJourRang(UserGame user) {
+		Connection connexion = null;
+		// PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connexion = daoFactory.getConnection();
+			
+			String requete="SELECT nbPoint FROM UserGame WHERE login=?";
+			preparedStatement = connexion.prepareStatement(requete);
+			preparedStatement.setString(1, user.getLogin());
+			System.out.println("le select de " + preparedStatement);
+			
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			System.out.println("le select de " + resultSet);
+			int pointsUtilisateur = resultSet.getInt("nbPoint");
+			
+			// recuperation du nombre total de point
+			requete = "SELECT SUM(nbPoint) AS total_points FROM UserGame";
+	        preparedStatement = connexion.prepareStatement(requete);
+	        resultSet = preparedStatement.executeQuery();
+	        resultSet.next();
+	        System.out.println("le select 2 de " + resultSet);
+	        int totalPoints = resultSet.getInt("total_points");
+
+	        // Récupération de la liste des utilisateurs
+	        requete = "SELECT login, nbPOint, rang FROM UserGame";
+	        preparedStatement = connexion.prepareStatement(requete);
+	        resultSet = preparedStatement.executeQuery();
+	        System.out.println("le select 3 de " + resultSet);
+			//parcours des utilisateur pour mettre à jour
+	        
+	        
+	        
+	        int rang = 0;
+	        int pointsPrecedents = 0;
+	        while (resultSet.next()) {
+	            String login = resultSet.getString("login");
+	            int points = resultSet.getInt("nbPoint");
+	            int nouveauRang = resultSet.getInt("rang");
+
+	            if (points > pointsPrecedents) {
+	                rang++;
+	                nouveauRang = rang;
+	            }
+
+	            if (login == user.getLogin()) {
+	                if (points == pointsUtilisateur) {
+	                    nouveauRang = rang;
+	                } else if (points > pointsUtilisateur) {
+	                    nouveauRang = rang - 1;
+	                }
+	            }
+
+	            String requeteMiseAJour = "UPDATE UserGame SET rang = ? WHERE login = ?";
+	            PreparedStatement preparedStatementMiseAJour = connexion.prepareStatement(requeteMiseAJour);
+	            System.out.println("le select de " + preparedStatementMiseAJour);
+	            preparedStatementMiseAJour.setInt(1, nouveauRang);
+	            preparedStatementMiseAJour.setString(2, login);
+	            preparedStatementMiseAJour.executeUpdate();
+	            System.out.println("le select de " + preparedStatementMiseAJour);
+	            System.out.println("le select 4 de " + preparedStatementMiseAJour);
+	            preparedStatementMiseAJour.close();
+	            System.out.println("le select 5de " + preparedStatementMiseAJour);
+	            pointsPrecedents = points;
+	        
+	        
+	       
+				System.out.println("le userGame est:" + user);
+
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		} finally {
+			fermeturesSilencieuses(resultSet, preparedStatement, connexion);
+		}
+
+		
+	
+		
 	}
 	
 	

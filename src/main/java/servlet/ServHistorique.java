@@ -45,12 +45,13 @@ public class ServHistorique extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Dans le servHistorique");
 		String login = (request.getParameter( "login" ) != null) ? request.getParameter( "login" ) : "";
-		String password = (request.getParameter( "password" ) != null) ? request.getParameter( "password" ) : "";
+		String nbPoint = (request.getParameter( "password" ) != null) ? request.getParameter( "password" ) : "";
 		String history = (request.getParameter( "history" ) != null) ? request.getParameter( "history" ) : "";
-	
+	    int p =Integer.parseInt(nbPoint);
 		//on recupÃ¨re le joueur ensuite
 		
-		
+		System.out.println("le login est " + login);
+		System.out.println("le nombre est " + nbPoint  + "histo"  + history);
 		
 		
 		PrintWriter printWriter = new PrintWriter(response.getWriter(), true);
@@ -60,9 +61,10 @@ public class ServHistorique extends HttpServlet {
 		
 		if (user != null) {
 			user.setLogin(login);
+			user.setNbPoint(p);
+			
 			userDao.updateHistory(user);
-			
-			
+			userDao.miseAJourRang(user);
 			String[] myHistory = history.split("_");
 			String date = myHistory[0];
 			String statut;

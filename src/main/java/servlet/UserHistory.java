@@ -44,14 +44,13 @@ public class UserHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UserGame user = new UserGame();
-		String idUser = request.getParameter("id");
-		int id= Integer.parseInt(idUser);
-		//HttpSession session = request.getSession();
-		if(id!=0 && user!=null) {
-			//request.setAttribute("user", userDao.afficheUser(id));
-		}
-		request.getServletContext().getRequestDispatcher("/WEB-INF/profilUser.jsp").forward(request, response);
+		/*
+		 * UserGame user = new UserGame(); String idUser = request.getParameter("id");
+		 * int id= Integer.parseInt(idUser); //HttpSession session =
+		 * request.getSession(); if(id!=0 && user!=null) {
+		 * //request.setAttribute("user", userDao.afficheUser(id)); }
+		 */
+		request.getServletContext().getRequestDispatcher("/WEB-INF/test.jsp").forward(request, response);
 		//response.sendRedirect( request.getContextPath() + VUE );
 	}
 
